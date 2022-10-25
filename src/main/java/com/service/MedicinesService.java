@@ -39,7 +39,7 @@ public class MedicinesService {
 	public List<String> getNames(String names) {
 		System.out.println("Input passed is " + names);
 
-		List<String> s1 = null;		
+		List<String> s1 = null;
 
 		s1 = mr.getNames(names);
 
@@ -55,8 +55,8 @@ public class MedicinesService {
 
 	// update the medicine
 	public String updateMedicine(Medicines m) {
-		System.out.println("User id from the input is " + m.getId());
-		System.out.println("User name from the input is " + m.getName());
+		System.out.println("Medicine id from the input is " + m.getId());
+		System.out.println("Medicine name from the input is " + m.getName());
 		Optional<Medicines> op = mr.findById(m.getId());
 
 		if (op.isPresent()) {
@@ -94,6 +94,16 @@ public class MedicinesService {
 			return mm;
 		} else {
 			return null; // TO-DO have to impliment exception to avoid run time exception
+		}
+	}
+
+	// based on the name get the medicine name
+	public Integer getIdByMedicine(String name) {
+
+		if (mr.existsByname(name)) {
+			return mr.getIdByName(name);
+		} else {
+			return 0;
 		}
 	}
 

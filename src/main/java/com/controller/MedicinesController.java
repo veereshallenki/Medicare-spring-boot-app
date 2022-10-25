@@ -21,7 +21,7 @@ import com.service.MedicinesService;
 
 @RestController
 @RequestMapping("medicine")
-@CrossOrigin //enable cross origin feature to call rest API
+@CrossOrigin // enable cross origin feature to call rest API
 public class MedicinesController {
 
 	@Autowired
@@ -57,11 +57,24 @@ public class MedicinesController {
 		return ms.findMedicineInfoById(id);
 		// return ms.findBYI
 	}
-	
+
 	// http://localhost:9797/medicine/findByName
 	@GetMapping(value = "/findByName", produces = MediaType.APPLICATION_JSON_VALUE)
-	public List<String> getMedcines( @RequestParam("input") String input )
-	{ 
+	public List<String> getMedcines(@RequestParam("input") String input) {
 		return ms.getNames(input);
 	}
+
+	// http://localhost:9797/medicine/ExtractMedicine
+	@GetMapping(value = "/ExtractMedicine", produces = MediaType.APPLICATION_JSON_VALUE)
+	public Medicines getMedcineByName(@RequestParam("name") String name) {
+
+		int result = ms.getIdByMedicine(name);
+
+		if (result != 0) {
+			return ms.findMedicineInfoById(result);
+		} else {
+			return null;
+		}
+	}
+
 }

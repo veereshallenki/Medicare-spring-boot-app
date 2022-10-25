@@ -16,5 +16,8 @@ public interface MedicinesRepository extends JpaRepository<Medicines, Integer> {
 	
 	@Query("select name from Medicines u where name like ?1% ")
 	public List<String> getNames(String input);   
+	
+	@Query("select id from Medicines u where name like ?1 ")
+	public Integer getIdByName(String name);  
 
 }
